@@ -133,17 +133,18 @@ function LoginPage() {
             <div style={{marginBottom: '20px'}}>
               <label style={{
                 display: 'block', fontSize: '13px', fontWeight: '600',
-                marginBottom: '8px', color: 'rgba(255,255,255,0.7)'
+                marginBottom: '8px', color: 'rgba(255,255,255,0.85)'
               }}>
                 Username
               </label>
               <div style={{position: 'relative'}}>
                 <div style={{
                   position: 'absolute', left: '14px', top: '50%',
-                  transform: 'translateY(-50%)', pointerEvents: 'none'
+                  transform: 'translateY(-50%)', pointerEvents: 'none',
+                  zIndex: 1
                 }}>
                   <svg style={{width: '16px', height: '16px',
-                    color: 'rgba(255,255,255,0.3)'}}
+                    color: 'rgba(255,255,255,0.5)'}}
                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round"
                       strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
@@ -154,21 +155,26 @@ function LoginPage() {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Enter your username"
-                  autoComplete="username"
+                  autoComplete="off"
+                  className="login-input"
                   style={{
                     width: '100%', paddingLeft: '44px',
                     paddingRight: '16px', paddingTop: '13px',
                     paddingBottom: '13px', borderRadius: '12px',
-                    fontSize: '14px', color: '#fff',
-                    background: 'rgba(255,255,255,0.07)',
-                    border: '1px solid rgba(255,255,255,0.12)',
+                    fontSize: '14px', color: '#ffffff',
+                    background: 'rgba(255,255,255,0.1)',
+                    border: '1px solid rgba(255,255,255,0.2)',
                     outline: 'none', boxSizing: 'border-box',
-                    transition: 'border 0.2s'
+                    transition: 'border 0.2s, background 0.2s'
                   }}
-                  onFocus={e =>
-                    e.target.style.border = '1px solid rgba(79,70,229,0.9)'}
-                  onBlur={e =>
-                    e.target.style.border = '1px solid rgba(255,255,255,0.12)'}
+                  onFocus={e => {
+                    e.target.style.border = '1px solid rgba(79,70,229,0.9)';
+                    e.target.style.background = 'rgba(255,255,255,0.12)';
+                  }}
+                  onBlur={e => {
+                    e.target.style.border = '1px solid rgba(255,255,255,0.2)';
+                    e.target.style.background = 'rgba(255,255,255,0.1)';
+                  }}
                 />
               </div>
             </div>
@@ -177,17 +183,18 @@ function LoginPage() {
             <div style={{marginBottom: '30px'}}>
               <label style={{
                 display: 'block', fontSize: '13px', fontWeight: '600',
-                marginBottom: '8px', color: 'rgba(255,255,255,0.7)'
+                marginBottom: '8px', color: 'rgba(255,255,255,0.85)'
               }}>
                 Password
               </label>
               <div style={{position: 'relative'}}>
                 <div style={{
                   position: 'absolute', left: '14px', top: '50%',
-                  transform: 'translateY(-50%)', pointerEvents: 'none'
+                  transform: 'translateY(-50%)', pointerEvents: 'none',
+                  zIndex: 1
                 }}>
                   <svg style={{width: '16px', height: '16px',
-                    color: 'rgba(255,255,255,0.3)'}}
+                    color: 'rgba(255,255,255,0.5)'}}
                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round"
                       strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
@@ -198,21 +205,26 @@ function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
-                  autoComplete="current-password"
+                  autoComplete="off"
+                  className="login-input"
                   style={{
                     width: '100%', paddingLeft: '44px',
                     paddingRight: '48px', paddingTop: '13px',
                     paddingBottom: '13px', borderRadius: '12px',
-                    fontSize: '14px', color: '#fff',
-                    background: 'rgba(255,255,255,0.07)',
-                    border: '1px solid rgba(255,255,255,0.12)',
+                    fontSize: '14px', color: '#ffffff',
+                    background: 'rgba(255,255,255,0.1)',
+                    border: '1px solid rgba(255,255,255,0.2)',
                     outline: 'none', boxSizing: 'border-box',
-                    transition: 'border 0.2s'
+                    transition: 'border 0.2s, background 0.2s'
                   }}
-                  onFocus={e =>
-                    e.target.style.border = '1px solid rgba(79,70,229,0.9)'}
-                  onBlur={e =>
-                    e.target.style.border = '1px solid rgba(255,255,255,0.12)'}
+                  onFocus={e => {
+                    e.target.style.border = '1px solid rgba(79,70,229,0.9)';
+                    e.target.style.background = 'rgba(255,255,255,0.12)';
+                  }}
+                  onBlur={e => {
+                    e.target.style.border = '1px solid rgba(255,255,255,0.2)';
+                    e.target.style.background = 'rgba(255,255,255,0.1)';
+                  }}
                 />
                 <button type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -220,9 +232,9 @@ function LoginPage() {
                     position: 'absolute', right: '14px', top: '50%',
                     transform: 'translateY(-50%)',
                     background: 'none', border: 'none',
-                    color: 'rgba(255,255,255,0.35)',
+                    color: 'rgba(255,255,255,0.5)',
                     cursor: 'pointer', padding: '0',
-                    display: 'flex', alignItems: 'center'
+                    display: 'flex', alignItems: 'center', zIndex: 1
                   }}>
                   {showPassword ? (
                     <svg style={{width: '16px', height: '16px'}}
@@ -291,10 +303,26 @@ function LoginPage() {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
         }
-        input::placeholder { color: rgba(255,255,255,0.25); }
-        input:-webkit-autofill {
-          -webkit-box-shadow: 0 0 0 30px rgba(79,70,229,0.15) inset !important;
-          -webkit-text-fill-color: #fff !important;
+
+        .login-input::placeholder {
+          color: rgba(255, 255, 255, 0.45) !important;
+          font-size: 14px;
+        }
+
+        .login-input {
+          color: #ffffff !important;
+          caret-color: #ffffff;
+        }
+
+        .login-input:-webkit-autofill,
+        .login-input:-webkit-autofill:hover,
+        .login-input:-webkit-autofill:focus,
+        .login-input:-webkit-autofill:active {
+          -webkit-box-shadow: 0 0 0 60px #2a2650 inset !important;
+          -webkit-text-fill-color: #ffffff !important;
+          caret-color: #ffffff !important;
+          border-radius: 12px !important;
+          font-size: 14px !important;
         }
       `}</style>
     </div>

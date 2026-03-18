@@ -100,7 +100,7 @@ function DashboardPage() {
       boxSizing: 'border-box', overflowX: 'hidden'
     }}>
 
-      {/* ── Navbar ── */}
+      {/* Navbar */}
       <nav style={{
         width: '100%',
         background: 'linear-gradient(135deg, #0f0c29, #302b63)',
@@ -118,8 +118,8 @@ function DashboardPage() {
             <div style={{
               width: '38px', height: '38px', borderRadius: '10px',
               background: 'linear-gradient(135deg, #4f46e5, #7c3aed)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              flexShrink: 0
+              display: 'flex', alignItems: 'center',
+              justifyContent: 'center', flexShrink: 0
             }}>
               <svg style={{width: '20px', height: '20px', color: '#fff'}}
                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -129,15 +129,10 @@ function DashboardPage() {
               </svg>
             </div>
             <div>
-              <div style={{
-                color: '#fff', fontWeight: '700', fontSize: '15px',
-                lineHeight: 1.2
-              }}>
+              <div style={{color: '#fff', fontWeight: '700', fontSize: '15px', lineHeight: 1.2}}>
                 Master Data Management System
               </div>
-              <div style={{
-                color: 'rgba(255,255,255,0.4)', fontSize: '11px'
-              }}>
+              <div style={{color: 'rgba(255,255,255,0.4)', fontSize: '11px'}}>
                 Department Module
               </div>
             </div>
@@ -172,15 +167,14 @@ function DashboardPage() {
               onMouseEnter={e =>
                 e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
               onMouseLeave={e =>
-                e.currentTarget.style.background = 'transparent'}
-            >
+                e.currentTarget.style.background = 'transparent'}>
               Logout
             </button>
           </div>
         </div>
       </nav>
 
-      {/* ── Page Content ── */}
+      {/* Page Content */}
       <div style={{
         width: '100%', maxWidth: '1400px',
         margin: '0 auto', padding: '36px 32px',
@@ -215,12 +209,9 @@ function DashboardPage() {
               whiteSpace: 'nowrap', transition: 'all 0.2s'
             }}
             onMouseEnter={e =>
-              e.currentTarget.style.boxShadow =
-                '0 8px 25px rgba(79,70,229,0.55)'}
+              e.currentTarget.style.boxShadow = '0 8px 25px rgba(79,70,229,0.55)'}
             onMouseLeave={e =>
-              e.currentTarget.style.boxShadow =
-                '0 4px 15px rgba(79,70,229,0.4)'}
-          >
+              e.currentTarget.style.boxShadow = '0 4px 15px rgba(79,70,229,0.4)'}>
             <svg style={{width: '16px', height: '16px'}}
               fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round"
@@ -230,44 +221,104 @@ function DashboardPage() {
           </button>
         </div>
 
-        {/* Stats Row */}
+        {/* Stats Cards — Updated */}
         <div style={{
-          display: 'flex', gap: '16px',
-          marginBottom: '24px', flexWrap: 'wrap'
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gap: '20px',
+          marginBottom: '28px'
         }}>
           {[
             {
               label: 'Total Departments',
               value: departments.length,
-              color: '#4f46e5', border: '#4f46e5'
+              color: '#4f46e5',
+              lightColor: '#eef2ff',
+              icon: (
+                <svg style={{width: '26px', height: '26px'}}
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                </svg>
+              )
             },
             {
               label: 'Search Results',
               value: filteredDepartments.length,
-              color: '#0891b2', border: '#0891b2'
+              color: '#0891b2',
+              lightColor: '#ecfeff',
+              icon: (
+                <svg style={{width: '26px', height: '26px'}}
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+              )
             },
           ].map((stat) => (
-            <div key={stat.label} style={{
-              background: '#fff', borderRadius: '16px',
-              padding: '22px 28px',
-              border: '1px solid #e8edf5',
-              borderLeft: `4px solid ${stat.border}`,
-              boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-              minWidth: '180px'
-            }}>
-              <div style={{
-                fontSize: '36px', fontWeight: '800',
-                color: stat.color, lineHeight: 1, marginBottom: '6px'
+            <div key={stat.label}
+              style={{
+                background: '#fff',
+                borderRadius: '20px',
+                padding: '24px 28px',
+                border: '1px solid #e8edf5',
+                boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '20px',
+                transition: 'transform 0.2s, box-shadow 0.2s',
+                cursor: 'default'
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = 'translateY(-3px)';
+                e.currentTarget.style.boxShadow =
+                  '0 12px 28px rgba(0,0,0,0.1)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow =
+                  '0 2px 12px rgba(0,0,0,0.05)';
               }}>
-                {stat.value}
-              </div>
+
+              {/* Icon Box */}
               <div style={{
-                fontSize: '12px', color: '#94a3b8',
-                fontWeight: '500', textTransform: 'uppercase',
-                letterSpacing: '0.5px'
+                width: '60px', height: '60px',
+                borderRadius: '16px',
+                background: stat.lightColor,
+                display: 'flex', alignItems: 'center',
+                justifyContent: 'center',
+                color: stat.color, flexShrink: 0
               }}>
-                {stat.label}
+                {stat.icon}
               </div>
+
+              {/* Text */}
+              <div style={{flex: 1}}>
+                <div style={{
+                  fontSize: '40px', fontWeight: '800',
+                  color: stat.color, lineHeight: 1,
+                  marginBottom: '6px'
+                }}>
+                  {stat.value}
+                </div>
+                <div style={{
+                  fontSize: '12px', fontWeight: '600',
+                  color: '#94a3b8', textTransform: 'uppercase',
+                  letterSpacing: '0.8px'
+                }}>
+                  {stat.label}
+                </div>
+              </div>
+
+              {/* Decorative circle */}
+              <div style={{
+                width: '48px', height: '48px',
+                borderRadius: '50%',
+                background: stat.lightColor,
+                opacity: 0.5, flexShrink: 0
+              }}/>
             </div>
           ))}
         </div>
@@ -294,15 +345,9 @@ function DashboardPage() {
               padding: '11px 16px',
               background: '#f8fafc',
               border: '1.5px solid #e2e8f0',
-              boxSizing: 'border-box', transition: 'border 0.2s'
-            }}
-              onFocus={e => e.currentTarget.style.border = '1.5px solid #4f46e5'}
-              onBlur={e => e.currentTarget.style.border = '1.5px solid #e2e8f0'}
-            >
-              <svg style={{
-                width: '16px', height: '16px',
-                color: '#94a3b8', flexShrink: 0
-              }}
+              boxSizing: 'border-box'
+            }}>
+              <svg style={{width: '16px', height: '16px', color: '#94a3b8', flexShrink: 0}}
                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round"
                   strokeWidth={2}
@@ -403,12 +448,10 @@ function DashboardPage() {
                             display: 'flex', alignItems: 'center',
                             justifyContent: 'center'
                           }}>
-                            <svg style={{
-                              width: '28px', height: '28px', color: '#818cf8'
-                            }} fill="none" stroke="currentColor"
-                              viewBox="0 0 24 24">
-                              <path strokeLinecap="round"
-                                strokeLinejoin="round" strokeWidth={1.5}
+                            <svg style={{width: '28px', height: '28px', color: '#818cf8'}}
+                              fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round"
+                                strokeWidth={1.5}
                                 d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                           </div>
@@ -440,8 +483,8 @@ function DashboardPage() {
                       onMouseEnter={e =>
                         e.currentTarget.style.background = '#f5f3ff'}
                       onMouseLeave={e =>
-                        e.currentTarget.style.background = '#fff'}
-                    >
+                        e.currentTarget.style.background = '#fff'}>
+
                       {/* ID */}
                       <td style={{padding: '16px 24px', whiteSpace: 'nowrap'}}>
                         <span style={{
@@ -455,25 +498,18 @@ function DashboardPage() {
 
                       {/* Name */}
                       <td style={{padding: '16px 24px', whiteSpace: 'nowrap'}}>
-                        <div style={{
-                          display: 'flex', alignItems: 'center', gap: '12px'
-                        }}>
+                        <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
                           <div style={{
                             width: '36px', height: '36px',
                             borderRadius: '10px', flexShrink: 0,
                             display: 'flex', alignItems: 'center',
                             justifyContent: 'center',
-                            fontSize: '14px', fontWeight: '700',
-                            color: '#fff',
-                            background:
-                              `hsl(${(dept.id * 60) % 360}, 65%, 55%)`
+                            fontSize: '14px', fontWeight: '700', color: '#fff',
+                            background: `hsl(${(dept.id * 60) % 360}, 65%, 55%)`
                           }}>
                             {dept.name.charAt(0).toUpperCase()}
                           </div>
-                          <span style={{
-                            fontWeight: '600', color: '#1e293b',
-                            fontSize: '14px'
-                          }}>
+                          <span style={{fontWeight: '600', color: '#1e293b', fontSize: '14px'}}>
                             {highlightText(dept.name, searchTerm)}
                           </span>
                         </div>
@@ -486,53 +522,39 @@ function DashboardPage() {
                       }}>
                         {dept.description
                           ? highlightText(dept.description, searchTerm)
-                          : <span style={{
-                              color: '#cbd5e1', fontStyle: 'italic'
-                            }}>No description</span>}
+                          : <span style={{color: '#cbd5e1', fontStyle: 'italic'}}>
+                              No description
+                            </span>}
                       </td>
 
                       {/* Created At */}
-                      <td style={{
-                        padding: '16px 24px', whiteSpace: 'nowrap'
-                      }}>
+                      <td style={{padding: '16px 24px', whiteSpace: 'nowrap'}}>
                         <div style={{
                           display: 'flex', alignItems: 'center',
                           gap: '6px', color: '#64748b', fontSize: '13px'
                         }}>
-                          <svg style={{
-                            width: '14px', height: '14px', color: '#94a3b8'
-                          }} fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path strokeLinecap="round"
-                              strokeLinejoin="round" strokeWidth={2}
+                          <svg style={{width: '14px', height: '14px', color: '#94a3b8'}}
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round"
+                              strokeWidth={2}
                               d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                           </svg>
-                          {new Date(dept.createdAt).toLocaleDateString(
-                            'en-US', {
-                              year: 'numeric',
-                              month: 'short',
-                              day: 'numeric'
-                            }
-                          )}
+                          {new Date(dept.createdAt).toLocaleDateString('en-US', {
+                            year: 'numeric', month: 'short', day: 'numeric'
+                          })}
                         </div>
                       </td>
 
                       {/* Actions */}
-                      <td style={{
-                        padding: '16px 24px', whiteSpace: 'nowrap'
-                      }}>
-                        <div style={{
-                          display: 'flex', alignItems: 'center', gap: '8px'
-                        }}>
+                      <td style={{padding: '16px 24px', whiteSpace: 'nowrap'}}>
+                        <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
                           <button onClick={() => openEditModal(dept)}
                             style={{
-                              display: 'flex', alignItems: 'center',
-                              gap: '6px', padding: '7px 14px',
-                              borderRadius: '8px', fontSize: '12px',
-                              fontWeight: '600', cursor: 'pointer',
+                              display: 'flex', alignItems: 'center', gap: '6px',
+                              padding: '7px 14px', borderRadius: '8px',
+                              fontSize: '12px', fontWeight: '600', cursor: 'pointer',
                               background: '#eef2ff', color: '#4f46e5',
-                              border: '1px solid #c7d2fe',
-                              transition: 'all 0.15s'
+                              border: '1px solid #c7d2fe', transition: 'all 0.15s'
                             }}
                             onMouseEnter={e => {
                               e.currentTarget.style.background = '#4f46e5';
@@ -543,10 +565,9 @@ function DashboardPage() {
                               e.currentTarget.style.color = '#4f46e5';
                             }}>
                             <svg style={{width: '12px', height: '12px'}}
-                              fill="none" stroke="currentColor"
-                              viewBox="0 0 24 24">
-                              <path strokeLinecap="round"
-                                strokeLinejoin="round" strokeWidth={2}
+                              fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round"
+                                strokeWidth={2}
                                 d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                             </svg>
                             Edit
@@ -554,13 +575,11 @@ function DashboardPage() {
 
                           <button onClick={() => setDeleteId(dept.id)}
                             style={{
-                              display: 'flex', alignItems: 'center',
-                              gap: '6px', padding: '7px 14px',
-                              borderRadius: '8px', fontSize: '12px',
-                              fontWeight: '600', cursor: 'pointer',
+                              display: 'flex', alignItems: 'center', gap: '6px',
+                              padding: '7px 14px', borderRadius: '8px',
+                              fontSize: '12px', fontWeight: '600', cursor: 'pointer',
                               background: '#fef2f2', color: '#ef4444',
-                              border: '1px solid #fecaca',
-                              transition: 'all 0.15s'
+                              border: '1px solid #fecaca', transition: 'all 0.15s'
                             }}
                             onMouseEnter={e => {
                               e.currentTarget.style.background = '#ef4444';
@@ -571,10 +590,9 @@ function DashboardPage() {
                               e.currentTarget.style.color = '#ef4444';
                             }}>
                             <svg style={{width: '12px', height: '12px'}}
-                              fill="none" stroke="currentColor"
-                              viewBox="0 0 24 24">
-                              <path strokeLinecap="round"
-                                strokeLinejoin="round" strokeWidth={2}
+                              fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round"
+                                strokeWidth={2}
                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                             </svg>
                             Delete
@@ -590,7 +608,7 @@ function DashboardPage() {
         </div>
       </div>
 
-      {/* ── Add/Edit Modal ── */}
+      {/* Add/Edit Modal */}
       {showModal && (
         <div style={{
           position: 'fixed', inset: 0, zIndex: 50,
@@ -612,19 +630,11 @@ function DashboardPage() {
               alignItems: 'center', justifyContent: 'space-between'
             }}>
               <div>
-                <h3 style={{
-                  color: '#fff', fontWeight: '700',
-                  fontSize: '16px', margin: 0
-                }}>
+                <h3 style={{color: '#fff', fontWeight: '700', fontSize: '16px', margin: 0}}>
                   {editingDept ? 'Edit Department' : 'Add New Department'}
                 </h3>
-                <p style={{
-                  color: 'rgba(255,255,255,0.45)',
-                  fontSize: '12px', margin: '4px 0 0'
-                }}>
-                  {editingDept
-                    ? 'Update department details'
-                    : 'Fill in the details below'}
+                <p style={{color: 'rgba(255,255,255,0.45)', fontSize: '12px', margin: '4px 0 0'}}>
+                  {editingDept ? 'Update department details' : 'Fill in the details below'}
                 </p>
               </div>
               <button onClick={() => setShowModal(false)}
@@ -633,8 +643,7 @@ function DashboardPage() {
                   background: 'rgba(255,255,255,0.1)',
                   color: 'rgba(255,255,255,0.7)',
                   border: 'none', cursor: 'pointer', fontSize: '16px',
-                  display: 'flex', alignItems: 'center',
-                  justifyContent: 'center'
+                  display: 'flex', alignItems: 'center', justifyContent: 'center'
                 }}>✕
               </button>
             </div>
@@ -644,8 +653,7 @@ function DashboardPage() {
                 <div style={{
                   background: '#fef2f2', border: '1px solid #fecaca',
                   color: '#dc2626', borderRadius: '10px',
-                  padding: '12px 16px', marginBottom: '20px',
-                  fontSize: '13px'
+                  padding: '12px 16px', marginBottom: '20px', fontSize: '13px'
                 }}>
                   ⚠ {formError}
                 </div>
@@ -655,17 +663,14 @@ function DashboardPage() {
                 <div style={{marginBottom: '20px'}}>
                   <label style={{
                     display: 'block', fontSize: '13px',
-                    fontWeight: '600', color: '#374151',
-                    marginBottom: '8px'
+                    fontWeight: '600', color: '#374151', marginBottom: '8px'
                   }}>
-                    Department Name{' '}
-                    <span style={{color: '#ef4444'}}>*</span>
+                    Department Name <span style={{color: '#ef4444'}}>*</span>
                   </label>
                   <input
                     type="text"
                     value={formData.name}
-                    onChange={(e) =>
-                      setFormData({...formData, name: e.target.value})}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
                     placeholder="e.g. Engineering"
                     style={{
                       width: '100%', padding: '12px 16px',
@@ -674,25 +679,18 @@ function DashboardPage() {
                       background: '#f8fafc', outline: 'none',
                       boxSizing: 'border-box', transition: 'border 0.2s'
                     }}
-                    onFocus={e =>
-                      e.target.style.border = '2px solid #4f46e5'}
-                    onBlur={e =>
-                      e.target.style.border = '2px solid #e8edf5'}
+                    onFocus={e => e.target.style.border = '2px solid #4f46e5'}
+                    onBlur={e => e.target.style.border = '2px solid #e8edf5'}
                   />
                 </div>
 
                 <div style={{marginBottom: '24px'}}>
                   <label style={{
                     display: 'block', fontSize: '13px',
-                    fontWeight: '600', color: '#374151',
-                    marginBottom: '8px'
+                    fontWeight: '600', color: '#374151', marginBottom: '8px'
                   }}>
                     Description{' '}
-                    <span style={{
-                      color: '#9ca3af', fontWeight: '400'
-                    }}>
-                      (optional)
-                    </span>
+                    <span style={{color: '#9ca3af', fontWeight: '400'}}>(optional)</span>
                   </label>
                   <textarea
                     value={formData.description}
@@ -708,10 +706,8 @@ function DashboardPage() {
                       resize: 'none', fontFamily: 'inherit',
                       boxSizing: 'border-box', transition: 'border 0.2s'
                     }}
-                    onFocus={e =>
-                      e.target.style.border = '2px solid #4f46e5'}
-                    onBlur={e =>
-                      e.target.style.border = '2px solid #e8edf5'}
+                    onFocus={e => e.target.style.border = '2px solid #4f46e5'}
+                    onBlur={e => e.target.style.border = '2px solid #e8edf5'}
                   />
                 </div>
 
@@ -721,16 +717,12 @@ function DashboardPage() {
                       flex: 1, padding: '13px', borderRadius: '10px',
                       fontSize: '14px', fontWeight: '600',
                       color: '#fff', border: 'none', cursor: 'pointer',
-                      background:
-                        'linear-gradient(135deg, #4f46e5, #7c3aed)',
+                      background: 'linear-gradient(135deg, #4f46e5, #7c3aed)',
                       boxShadow: '0 4px 15px rgba(79,70,229,0.35)'
                     }}>
-                    {editingDept
-                      ? 'Update Department'
-                      : 'Create Department'}
+                    {editingDept ? 'Update Department' : 'Create Department'}
                   </button>
-                  <button type="button"
-                    onClick={() => setShowModal(false)}
+                  <button type="button" onClick={() => setShowModal(false)}
                     style={{
                       flex: 1, padding: '13px', borderRadius: '10px',
                       fontSize: '14px', fontWeight: '600',
@@ -746,7 +738,7 @@ function DashboardPage() {
         </div>
       )}
 
-      {/* ── Delete Modal ── */}
+      {/* Delete Modal */}
       {deleteId && (
         <div style={{
           position: 'fixed', inset: 0, zIndex: 50,
@@ -775,18 +767,11 @@ function DashboardPage() {
                   d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
               </svg>
             </div>
-            <h3 style={{
-              fontSize: '18px', fontWeight: '700',
-              color: '#1e293b', margin: '0 0 8px'
-            }}>
+            <h3 style={{fontSize: '18px', fontWeight: '700', color: '#1e293b', margin: '0 0 8px'}}>
               Delete Department?
             </h3>
-            <p style={{
-              color: '#64748b', fontSize: '14px',
-              margin: '0 0 24px', lineHeight: '1.6'
-            }}>
-              This action cannot be undone. The department will be
-              permanently removed.
+            <p style={{color: '#64748b', fontSize: '14px', margin: '0 0 24px', lineHeight: '1.6'}}>
+              This action cannot be undone. The department will be permanently removed.
             </p>
             <div style={{display: 'flex', gap: '12px'}}>
               <button onClick={() => handleDelete(deleteId)}
@@ -794,8 +779,7 @@ function DashboardPage() {
                   flex: 1, padding: '13px', borderRadius: '10px',
                   fontSize: '14px', fontWeight: '600',
                   color: '#fff', border: 'none', cursor: 'pointer',
-                  background:
-                    'linear-gradient(135deg, #ef4444, #dc2626)',
+                  background: 'linear-gradient(135deg, #ef4444, #dc2626)',
                   boxShadow: '0 4px 15px rgba(239,68,68,0.3)'
                 }}>
                 Yes, Delete
